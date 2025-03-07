@@ -63,10 +63,18 @@ AFRAME.registerComponent("simple-physics", {
     // Because we used getWorldPosition above, we might want to convert
     // the final world pos back to local, or just set the object’s world matrix.
     // For simplicity, set the object3D’s position directly (local).
-    // this.el.object3D.position.copy(this.position);
     this.el.object3D.position.copy(this.physicsPosition);
 
     // (Optional) Damping if you want to gradually lose velocity
     this.velocity.multiplyScalar(0.999);
+
+    if (this.position.y < -50) {
+      this.position.y = -50;
+      this.velocity.y = 0;
+      
+      window.dispatchEvent(
+        new CustomEvent("game-lost", { detail: { lost: true } })
+      );
+    }
   },
 });

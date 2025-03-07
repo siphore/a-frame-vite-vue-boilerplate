@@ -35,17 +35,36 @@ const allAssetsLoaded = ref(false);
 
     <a-entity gltf-model="assets/models/skybox.glb" scale="2 2 2" id="background"></a-entity>
     <!-- <a-entity gltf-model="assets/models/penguin.glb" scale="5 5 5" position="0 2.199 -24" class="hookable"></a-entity> -->
+    <!-- Starting platform -->
     <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 0"
       data-role="nav-mesh"></a-entity>
-    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -25"
+
+    <!-- Parkour platforms with increasing height and varying positions -->
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.2 0.2 0.2" position="3 2 -10"
       data-role="nav-mesh"></a-entity>
-    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -50"
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.2 0.2 0.2" position="-4 4 -20"
       data-role="nav-mesh"></a-entity>
-    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -75"
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.2 0.2 0.2" position="5 6 -30"
       data-role="nav-mesh"></a-entity>
-    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -100"
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.2 0.2 0.2" position="-3 8 -40"
       data-role="nav-mesh"></a-entity>
-    <a-box position="0 4 -10" scale="0.5 0.5 0.5" color="red" class="hookable"></a-box>
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.2 0.2 0.2" position="4 10 -50"
+      data-role="nav-mesh"></a-entity>
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 12 -60"
+      data-role="nav-mesh"></a-entity>
+
+    <!-- Hookable targets for grappling between platforms -->
+    <a-box position="3 5 -10" scale="0.3 0.3 0.3" color="red" class="hookable"></a-box>
+    <a-box position="-4 7 -20" scale="0.3 0.3 0.3" color="red" class="hookable"></a-box>
+    <a-box position="5 9 -30" scale="0.3 0.3 0.3" color="red" class="hookable"></a-box>
+    <a-box position="-3 11 -40" scale="0.3 0.3 0.3" color="red" class="hookable"></a-box>
+    <a-box position="4 13 -50" scale="0.3 0.3 0.3" color="red" class="hookable"></a-box>
+
+    <!-- Losing popup -->
+    <a-entity id="lostPopup" visible="false" position="0 1.6 -2">
+      <a-plane width="2" height="1" color="#000" opacity="0.8"></a-plane>
+      <a-text value="You Lost!" align="center" position="0 -50 0.01" color="#FFF"></a-text>
+    </a-entity>
 
     <TheCameraRig />
 

@@ -17,10 +17,17 @@ AFRAME.registerComponent("grappling-hook", {
     this.releaseHook = this.releaseHook.bind(this);
     this.pull = this.pull.bind(this);
 
+    // Create a visible rope
+    this.rope = document.createElement("a-entity");
+    this.rope.setAttribute("line", "color: #ff0000");
+    this.el.sceneEl.appendChild(this.rope);
+
+    // VR
     this.el.addEventListener("triggerdown", this.shootHook);
     this.el.addEventListener("triggerup", this.releaseHook);
     this.el.addEventListener("gripdown", this.pull);
 
+    // Desktop
     window.addEventListener("keydown", (e) => {
       if (e.key === " ") {
         if (this.data.isHooked) this.releaseHook();
@@ -71,10 +78,27 @@ AFRAME.registerComponent("grappling-hook", {
 
     // Scale pull force appropriately.
     const pullForce = pullDirection.multiplyScalar(
-      this.data.pullStrength * 0.9
+      this.data.pullStrength * 0.8
     );
 
     // Emit an event with the pull force.
     this.el.emit("apply-pull-force", { force: pullForce }, false);
+  },
+
+  tick: function (time, delta) {
+    // Update rope position if the hook is active.
+    if (this.data.isHooked) {
+      const headPosition = new THREE.Vector3();
+      this.head.object3D.getWorldPosition(headPosition);
+      this.rope.setAttribute(
+        "line",
+        `start: ${headPosition.x} ${headPosition.y - 0.5} ${headPosition.z}; end: ${this.hookPoint.x} ${this.hookPoint.y} ${this.hookPoint.z}; color: #ff0000`
+      );
+    } else {
+      this.rope.setAttribute(
+        "line",
+        "start: 0 0 0; end: 0 0 0; color: #ff0000"
+      );
+    }
   },
 });
