@@ -1,66 +1,51 @@
 <script setup>
-  import { ref } from 'vue';
+import { ref } from 'vue';
 
-  import TheCameraRig from './TheCameraRig.vue';
-  import TheMainRoom from './TheMainRoom.vue';
-  import TheLifeCubeRoom from './TheLifeCubeRoom.vue';
-  import ThePhysicRoom from './ThePhysicRoom.vue';
+import TheCameraRig from './TheCameraRig.vue';
 
-  import '../aframe/simple-grab.js';
+import '../aframe/simple-grab.js';
+import '../aframe/outline.js';
+import '../aframe/grappling-hook.js';
 
-  defineProps({
-    scale: Number,
-    overlaySelector: String,
-  });
+defineProps({
+  scale: Number,
+  overlaySelector: String,
+});
 
-  const allAssetsLoaded = ref(false);
+const allAssetsLoaded = ref(false);
 </script>
 
 <template>
-  <a-scene
-    background="color: black;"
-    :webxr="`
+  <a-scene background="color: black;" :webxr="`
       requiredFeatures: local-floor;
       referenceSpaceType: local-floor;
       optionalFeatures: dom-overlay;
       overlayElement: ${overlaySelector};
-    `"
-    xr-mode-ui="XRMode: xr"
-    physx="
-      autoLoad: true;
+    `" xr-mode-ui="XRMode: xr" physx="
       delay: 1000;
       useDefaultScene: false;
       wasmUrl: lib/physx.release.wasm;
-    "
-    simple-grab
-  >
+    " outline simple-grab>
 
-    <a-assets @loaded="allAssetsLoaded = true">
-      <!--
-        Title: VR Gallery
-        Model source: https://sketchfab.com/3d-models/vr-gallery-1ac32ed62fdf424498acc146fad31f7e
-        Model author: https://sketchfab.com/mvrc.art (Maxim Mavrichev)
-        Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
-      -->
-      <a-asset-item id="room" src="assets/vr_gallery.glb"></a-asset-item>
-      <!--
-        Title: 3D Gallery for VR projects
-        Model source: https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1
-        Model author: https://sketchfab.com/tekuto1s (tekuto1s)
-        Model license: CC BY 4.0 ( https://creativecommons.org/licenses/by/4.0/ )
-      -->
-      <a-asset-item id="physic-room" src="assets/3d_gallery_for_vr_projects.glb"></a-asset-item>
-      <a-asset-item id="sound-1" response-type="arraybuffer" src="assets/sound1.mp3" preload="auto"></a-asset-item>
-      <img id="room-physic-out-texture" :src="`assets/main-room-from-physic-room.png`">
-      <img id="room-gol-out-texture" :src="`assets/main-room-from-gol-room.png`">
-      <img id="room-physic-texture" :src="`assets/physicRoom.png`">
+    <a-assets timeout="5000" @loaded="allAssetsLoaded = true">
+      <a-asset-item id="skybox" src="assets/models/skybox.glb"></a-asset-item>
+      <a-asset-item id="platform" src="assets/models/platform.glb"></a-asset-item>
+      <a-asset-item id="penguin" src="assets/models/penguin.glb"></a-asset-item>
     </a-assets>
 
-    <template v-if="allAssetsLoaded">
-      <TheMainRoom :scale="scale" />
-      <TheLifeCubeRoom />
-      <ThePhysicRoom />
-    </template>
+    <a-entity gltf-model="assets/models/skybox.glb" scale="2 2 2" id="background"></a-entity>
+    <!-- <a-entity gltf-model="assets/models/penguin.glb" scale="5 5 5" position="0 2.199 -24" class="hookable"></a-entity> -->
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 0"
+      data-role="nav-mesh"></a-entity>
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -25"
+      data-role="nav-mesh"></a-entity>
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -50"
+      data-role="nav-mesh"></a-entity>
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -75"
+      data-role="nav-mesh"></a-entity>
+    <a-entity gltf-model="assets/models/platform.glb" scale="0.3 0.3 0.3" position="0 -0.2163 -100"
+      data-role="nav-mesh"></a-entity>
+    <a-box position="0 4 -10" scale="0.5 0.5 0.5" color="red" class="hookable"></a-box>
 
     <TheCameraRig />
 
