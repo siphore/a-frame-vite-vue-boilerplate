@@ -10,8 +10,6 @@
 ![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
-### [>> DEMO <<](https://onivers.com/aframe-vue-boilerplate/)
-
 ## Included in the boilerplate
 
 ### Libs and components
@@ -24,14 +22,14 @@
 
 ### Movement modes support
 
-- **Desktop** – Keyboard for move (_WASD_ or Arrows keys) + Mouse for look control (Drag and drop)
-- **Mobile** – 1x Finger touch to go forward + 2x Fingers touch to go backward + Gaze cursor for click
-- **VR/AR** – walk + Teleport (Grip for grab and laser for click) + Gaze cursor for click in AR
+- **Desktop** – Keyboard for move (_WASD_ or Arrows keys) + Mouse for look control + Space bar for grab/release (no need to hold) + E to pull towards the hooked object. You can hook all the red cubes.
+- **VR/AR** – Trigger to grab/release + Grip to pull
 
 ### 3D models
 
-- **Main room** – [VR Gallery](https://sketchfab.com/3d-models/vr-gallery-1ac32ed62fdf424498acc146fad31f7e) by [Maxim Mavrichev](https://sketchfab.com/mvrc.art) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **3D physic room** – [3d_gallery_for_vr_projects](https://sketchfab.com/3d-models/3d-gallery-for-vr-projects-68f77ed8558c4bd59e0a13e2cc9d1fd1) by [tekuto1s](https://sketchfab.com/tekuto1s) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+- **Main objects** - [Wooden Platform](https://skfb.ly/ou7PF) by [RyanBlack](https://sketchfab.com/RyanBlack) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+- **Environment** - [SkyBox Anime Sky](https://skfb.ly/oIINu) by [Paul](https://sketchfab.com/paul_paul_paul) is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
 ---
 
@@ -42,7 +40,7 @@
 ### Clone (or fork, or download)
 
 ```sh
-git clone https://github.com/Chabloz/a-frame-vite-vue-boilerplate.git .
+git clone https://github.com/siphore/a-frame-vite-vue-boilerplate .
 ```
 
 ### Install dependencies
